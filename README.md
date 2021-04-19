@@ -83,5 +83,9 @@ calcuts PB.stat > cutoffs 2>calcults.log
 
 # de-duplicaation
 purge_dups -2 -T cutoffs -c PB.base.cov ./split/Pcro.split.self.paf.gz > dups.bed 2> purge_dups.log
-get_seqs dups.bed <GENOME>
+get_seqs -e dups.bed <GENOME>
 ```
+
+## REPEAT MASKING
+
+
