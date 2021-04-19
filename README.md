@@ -25,7 +25,7 @@ _________________________________
 
 ASSEMBLY
 ========
-# FLYE
+## FLYE
 
 Flye was used for assembly of the PacBio reads.
 
