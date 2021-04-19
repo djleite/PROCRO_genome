@@ -25,6 +25,7 @@ _________________________________
 
 ASSEMBLY
 ========
+# FLYE
 
 Flye was used for assembly of the PacBio reads.
 
@@ -38,5 +39,6 @@ flye \
   --asm-coverage 75 \
   -m 8000 \
 ```
+
 
 
