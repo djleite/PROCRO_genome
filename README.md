@@ -24,8 +24,6 @@ The main pipeline commands contain
 _________________________________
 
 ## ASSEMBLY
-===========
-## FLYE
 
 Flye was used for assembly of the PacBio reads.
 
@@ -40,5 +38,34 @@ flye \
   -m 8000 \
 ```
 
+Polishing with NextPolish requires file of file names for long and short reads, and a config file. The ```run.cgf``` file was formatted as below, with .
+
+```
+[General]
+job_type = local
+job_prefix = <DIR>
+task = best
+rewrite = yes
+rerun = 3
+parallel_jobs = 4
+multithread_jobs = 8
+genome = <GENOME>
+genome_size = 2250000000
+workdir = ./polish
+polish_options = -p {multithread_jobs}
+
+[sgs_option]
+sgs_fofn = ./sgs.fofn
+sgs_options = -max_depth 35 -minimap2
+
+[lgs_option]
+lgs_fofn = ./lgs.fofn
+lgs_options = -min_read_len 5k -max_read_len 300k -max_depth 60
+lgs_minimap2_options = -x map-pb -t {multithread_jobs}
+```
+
+This was run as standard using
+
+```NextPolish run.cfg```
 
 
