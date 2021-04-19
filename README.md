@@ -12,7 +12,7 @@ This repository contains the assembly and annotation pipeline and the annotation
 
 The annotation and fasta files:
 * ```PROCRO.gtf        # GTF annotation```
-* ```PROCRO.gff3       # GFF3 annotation```
+* ```PROCRO.gff        # GFF annotation```
 * ```PROCRO_cds.fasta  # cds fasta```
 * ```PROCRO_aa.fasta   # animo acid annotation```
 
