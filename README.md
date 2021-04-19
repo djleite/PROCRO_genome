@@ -11,10 +11,10 @@ Description
 This repository contains the assembly and annotation pipeline and the annotation for the genome of the polyclad flatworm _Prostheceraeus crozeri_. For futher details please see the publication XXX and if you have questions feel free to email me or the correspondence in the paper. All details on software versions can be found in the paper.
 
 The annotation and fasta files:
-* ```PROCRO.gtf        # GTF annotation```
-* ```PROCRO.gff        # GFF annotation```
-* ```PROCRO_cds.fasta  # cds fasta```
-* ```PROCRO_aa.fasta   # animo acid annotation```
+* ```PROCRO.gtf.gz        # GTF annotation```
+* ```PROCRO.gff.gz        # GFF annotation```
+* ```PROCRO_cds.fasta.gz  # cds fasta```
+* ```PROCRO_aa.fasta.gz   # animo acid annotation```
 
 The main pipeline commands contain
 * ASSEMBLY (FLYE assembly, NextPolish polishing, Purge_dups haplotype associated deduplication)
