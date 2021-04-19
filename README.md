@@ -118,7 +118,11 @@ RepeatMasker \
 
 ## ANNOTATION
 
-Annotation was performed with BRAKER2, an automated AUGUSTUS trainer. RNAseq reads were first mapped to the genome using STAR with the 2-Pass method.
+Annotation was performed with BRAKER2, an automated AUGUSTUS trainer, using RNAseq data as evidence.
+
+### _Mapping RNAseq data_
+
+RNAseq reads were first mapped to the genome using STAR with the 2-Pass method.
 
 ```
 #   INDEX
@@ -172,6 +176,8 @@ STAR \
 samtools sort -@ 31 -o ${MAPPINGDIR}/2-pass-PE_Aligned_sorted.out.bam ${MAPPINGDIR}/2-pass-PE_Aligned.out.bam
 samtools sort -@ 31 -o ${MAPPINGDIR}/2-pass_SE_Aligned_sorted.out.bam ${MAPPINGDIR}/2-pass_SE_Aligned.out.bam
 ```
+
+### _Annotation_
 
 BRAKER2 was then run using these mapped reads
 
