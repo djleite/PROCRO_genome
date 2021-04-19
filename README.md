@@ -180,7 +180,7 @@ samtools sort -@ 31 -o ${MAPPINGDIR}/2-pass-PE_Aligned_sorted.out.bam ${MAPPINGD
 samtools sort -@ 31 -o ${MAPPINGDIR}/2-pass_SE_Aligned_sorted.out.bam ${MAPPINGDIR}/2-pass_SE_Aligned.out.bam
 ```
 
-### _Annotation_
+### _Gene annotation_
 
 BRAKER2 was then run using these mapped reads
 
