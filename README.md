@@ -26,5 +26,15 @@ _________________________________
 ASSEMBLY
 ========
 
+Flye was used for assembly of the PacBio reads.
+
+```flye \
+  --pacbio-raw ${READ1} ${READ2} \
+  -g 2.53g \
+  -o ${GENOME_OUT} \
+  -t 40 \
+  -i 1 \
+  --asm-coverage 75 \
+  -m 8000 \```
 
 
