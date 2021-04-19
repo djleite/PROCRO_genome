@@ -8,4 +8,4 @@ _________________________________
 
 Description
 ===========
-This repository contains the pipeline and annotation for the genome of Prostheceraeus crozeri. For futher details please see the publication XXX.
+This repository contains the pipeline and annotation for the genome of the polyclad flatworm /Prostheceraeus crozeri/. For futher details please see the publication XXX.
