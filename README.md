@@ -23,8 +23,8 @@ The main pipeline commands contain
 
 _________________________________
 
-ASSEMBLY
-========
+## ASSEMBLY
+===========
 ## FLYE
 
 Flye was used for assembly of the PacBio reads.
