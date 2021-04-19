@@ -70,3 +70,18 @@ This was run as standard using
 ```NextPolish run.cfg```
 
 ### _De-duplication_
+
+Purge_dups was used to remove duplicate contigs that were likely associated with haplotype specific regions.
+
+
+
+```
+# PacBio reads were aligned to the polished genome with minimap2
+for i in PacBio_CELL_1.fasta PacBio_CELL_2.fasta ; do minimap2 -I 40G -t 32 -xmap-pb <GENOME> $i | gzip -c - > ${i/.fasta/.paf.gz} ; done
+pbcstat *.paf.gz
+calcuts PB.stat > cutoffs 2>calcults.log
+
+# de-duplicaation
+purge_dups -2 -T cutoffs -c PB.base.cov ./split/Pcro.split.self.paf.gz > dups.bed 2> purge_dups.log
+get_seqs dups.bed <GENOME>
+```
