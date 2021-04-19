@@ -73,8 +73,6 @@ This was run as standard using
 
 Purge_dups was used to remove duplicate contigs that were likely associated with haplotype specific regions.
 
-
-
 ```
 # PacBio reads were aligned to the polished genome with minimap2
 for i in PacBio_CELL_1.fasta PacBio_CELL_2.fasta ; do minimap2 -I 40G -t 32 -xmap-pb <GENOME> $i | gzip -c - > ${i/.fasta/.paf.gz} ; done
@@ -86,6 +84,109 @@ purge_dups -2 -T cutoffs -c PB.base.cov ./split/Pcro.split.self.paf.gz > dups.be
 get_seqs -e dups.bed <GENOME>
 ```
 
+
+
 ## REPEAT MASKING
 
+Repeats were masked using a custom generated library and the Dfam3.0 library.
+
+```
+SEQFILE=purged_genome.fa
+DATABASE=purgedDB
+
+BuildDatabase \
+  -engine rmblast \
+  -name $DATABASE $SEQFILE \
+  
+RepeatModeler \
+  -database $DATABASE \
+  -engine rmblast \
+  -pa 44 \
+  -LTRStruct \
+  -genomeSampleSizeMax 500000000
+
+RepeatMasker \
+  -dir . \
+  -engine ncbi \
+  -pa 44 \
+  -lib purgedDB-families.fa \
+  -gff \
+  -html \
+  -xsmall \
+  $SEQFILE \
+```
+
+## ANNOTATION
+
+Annotation was performed with BRAKER2, an automated AUGUSTUS trainer. RNAseq reads were first mapped to the genome using STAR with the 2-Pass method.
+
+```
+#   INDEX
+STAR \
+--runThreadN 32 \
+--runMode genomeGenerate \
+--genomeDir ${GENOMEDIR} \
+--genomeFastaFiles ${GENOME} \
+
+######## 1st PASS
+# mapping PE
+STAR \
+--runThreadN 32 \
+--genomeDir ${GENOMEDIR} \
+--outFileNamePrefix ${MAPPINGDIR}/1-pass-PE_ \
+--outSAMtype BAM Unsorted \
+--readFilesCommand zcat \
+--readFilesIn SRR1801815_1_paired.fq.gz SRR1801815_2_paired.fq.gz \
+
+# mapping SE
+STAR \
+--runThreadN 32 \
+--genomeDir ${GENOMEDIR} \
+--outFileNamePrefix ${MAPPINGDIR}/1-pass_SE_ \
+--outSAMtype BAM Unsorted \
+--readFilesCommand zcat \
+--readFilesIn SRR1801812.fq.gz \
+
+######## 2nd PASS
+# mapping PE
+STAR \
+--runThreadN 32 \
+--genomeDir ${GENOMEDIR} \
+--outFileNamePrefix ${MAPPINGDIR}/2-pass-PE_ \
+--outSAMtype BAM Unsorted \
+--readFilesCommand zcat \
+--readFilesIn SRR1801815_1_paired.fq.gz SRR1801815_2_paired.fq.gz \
+--sjdbFileChrStartEnd ${MAPPINGDIR}/1-pass-PE_SJ.out.tab ${MAPPINGDIR}/1-pass_SE_SJ.out.tab \
+
+# mapping SE
+STAR \
+--runThreadN 32 \
+--genomeDir ${GENOMEDIR} \
+--outFileNamePrefix ${MAPPINGDIR}/2-pass_SE_ \
+--outSAMtype BAM Unsorted \
+--readFilesCommand zcat \
+--readFilesIn SRR1801812.fq.gz \
+--sjdbFileChrStartEnd ${MAPPINGDIR}/1-pass-PE_SJ.out.tab ${MAPPINGDIR}/1-pass_SE_SJ.out.tab \
+
+########   SAMTOOLS SORTING
+samtools sort -@ 31 -o ${MAPPINGDIR}/2-pass-PE_Aligned_sorted.out.bam ${MAPPINGDIR}/2-pass-PE_Aligned.out.bam
+samtools sort -@ 31 -o ${MAPPINGDIR}/2-pass_SE_Aligned_sorted.out.bam ${MAPPINGDIR}/2-pass_SE_Aligned.out.bam
+```
+
+BRAKER2 was then run using these mapped reads
+
+```
+braker.pl \
+  --workingdir=${OUTPUT} \
+  --species=${SPECIES} \
+  --softmasking \
+  --cleanup \
+  --cores=38 \
+  --rounds 10 \
+  --genome=${GENOME} \
+  --bam=${MAPPINGDIR}/2-pass-PE_Aligned_sorted.out.bam,${MAPPINGDIR}/2-pass_SE_Aligned_sorted.out.bam \
+  --UTR=on \
+  --crf \
+  --gff3 \
+```
 
