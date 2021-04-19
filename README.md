@@ -39,7 +39,7 @@ flye \
   -m 8000 \
 ```
 ### _Polish_
-Polishing with NextPolish requires file of file names for long (```lgs.fofn```) and short reads (```sgs.fofn```), and a config file (```run.cfg```). The ```run.cfg``` file was formatted as below, with .
+Polishing with NextPolish requires file of file names for long (```lgs.fofn```) and trimmed short reads (```sgs.fofn```), and a config file (```run.cfg```). The ```run.cfg``` file was formatted as below, with .
 
 ```
 [General]
@@ -122,7 +122,7 @@ Annotation was performed with BRAKER2, an automated AUGUSTUS trainer, using RNAs
 
 ### _Mapping RNAseq data_
 
-RNAseq reads were first mapped to the genome using STAR with the 2-Pass method.
+RNAseq reads were trimmed and then mapped to the genome using STAR with the 2-Pass method.
 
 ```
 #   INDEX
