@@ -39,7 +39,7 @@ flye \
   -m 8000 \
 ```
 ### _Polish_
-Polishing with NextPolish requires file of file names for long and short reads, and a config file. The ```run.cgf``` file was formatted as below, with .
+Polishing with NextPolish requires file of file names for long (```lgs.fofn```) and short reads (```sgs.fofn```), and a config file (```run.cfg```). The ```run.cfg``` file was formatted as below, with .
 
 ```
 [General]
