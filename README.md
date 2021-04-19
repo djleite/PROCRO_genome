@@ -86,6 +86,7 @@ get_seqs -e dups.bed <GENOME>
 
 
 
+
 ## REPEAT MASKING
 
 Repeats were masked using a custom generated library and the Dfam3.0 library.
@@ -115,6 +116,8 @@ RepeatMasker \
   -xsmall \
   $SEQFILE \
 ```
+
+
 
 ## ANNOTATION
 
