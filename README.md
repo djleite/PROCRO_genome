@@ -16,7 +16,7 @@ The annotation and fasta files:
 The main pipeline commands contain
 * ASSEMBLY (FLYE assembly, NextPolish polishing, Purge_dups haplotype associated deduplication)
 * REPEAT MASKING (Repeat modeling and masking)
-* ANNOTATION (using BRAKER)
+* ANNOTATION (using BRAKER2)
 
 _________________________________
 
