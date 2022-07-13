@@ -6,7 +6,7 @@ _________________________________
 
 Description
 ===========
-This repository contains the assembly and annotation pipeline as well as the annotation for the genome of the polyclad flatworm _Prostheceraeus crozeri_. All details on software versions can be found in the paper.
+This repository contains the assembly and annotation pipeline as well as the annotation for the genome of the polyclad flatworm _Prostheceraeus crozeri_ (ENA: GCA_907163375). All details on software versions can be found in the paper.
 
 The annotation and fasta files:
 * ```PROCRO.gtf.gz        # GTF annotation```
